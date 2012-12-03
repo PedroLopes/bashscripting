@@ -6,9 +6,9 @@
 MAXCOUNT=$1
 count=1
 
-while [ "$count" -le $MAXCOUNT ]      # Generate 10 ($MAXCOUNT) random integers.
+while [ "$count" -le $MAXCOUNT ]     
 do
   number=$RANDOM
   echo $number
-  let "count += 1"  # Increment count.
+  let "count += 1"  
 done
