@@ -1,0 +1,14 @@
+# Generate binary choice, that is, "true" or "false" value.
+BINARY=2
+T=1
+number=$RANDOM
+
+let "number %= $BINARY"
+#  Note that    let "number >>= 14"    gives a better random distribution
+#+ (right shifts out everything except last binary digit).
+if [ "$number" -eq $T ]
+then
+  echo "DO"
+else
+  echo "DO NOT"
+fi  
