@@ -1,0 +1,17 @@
+#!/bin/sh
+SERVICE='Flux'
+ 
+if ps ax | grep -v grep | grep $SERVICE > /dev/null
+then
+    echo "$SERVICE service running, warn user"
+    
+    /usr/bin/osascript <<-EOF
+
+      tell application "System Events"
+        activate
+        display dialog "Beware, Flux is running and colors are not real."
+      end tell
+EOF
+else
+    echo "$SERVICE is not running, all is good."
+fi

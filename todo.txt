@@ -1,0 +1,4 @@
+checkprocess running:
+- checks if a process is running
+- I made it for flux, so run this process in the launch script of your pixel editing programs, such as GIMP, etc. 
+- for files that just run of a bin (e.g., Inkscape or iMove on Mac) you need to manually create a script that "execs" the main file, but does the check first. 

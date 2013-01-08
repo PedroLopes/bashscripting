@@ -1,0 +1,9 @@
+#!/bin/bash
+/usr/bin/osascript <<-EOF
+
+    tell application "System Events"
+        activate
+        display dialog "Hello world"
+    end tell
+
+EOF
