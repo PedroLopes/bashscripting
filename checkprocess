@@ -1,3 +1,6 @@
+#This script checks if flux is running, you should call this before your app starts. That can be done by adding a call to
+#this script right before your app starts, I simply modify the app launcher for that. Some other fancy ways are doable. 
+
 #!/bin/sh
 SERVICE='Flux'
  
