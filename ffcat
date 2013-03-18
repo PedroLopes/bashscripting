@@ -1,0 +1,17 @@
+cmd="( "
+
+h264options="-vcodec libx264 -b 512k -flags +loop+mv4 -cmp 256 \
+ -partitions +parti4x4+parti8x8+partp4x4+partp8x8+partb8x8 \
+ -me_method hex -subq 7 -trellis 1 -refs 5 -bf 3 \
+ -flags2 +bpyramid+wpred+mixed_refs+dct8x8 -coder 1 -me_range 16 \
+   -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -qmin 10\
+ -qmax 51 -qdiff 4"
+
+outfile="out-`date +%F-%H%M.%S`.mp4"
+
+for i; do
+    cmd="${cmd}ffmpeg -i $i -ab 256000 -vb 10000000 -mbd rd -trellis 2 -cmp 2 -subcmp 2 -g 100 -f mpeg -; "
+done
+cmd="${cmd} ) | ffmpeg -y -i - -threads 8 ${h264options} -vb 10000000 -acodec libfaac -ar 44100 -ab 128k -s 1280x720 ${outfile}"
+echo "${cmd}"
+eval ${cmd}
