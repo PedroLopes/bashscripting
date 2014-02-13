@@ -1,0 +1,1 @@
+echo -e "\n$(top -l 1 | awk '/PhysMem/';)\n"
