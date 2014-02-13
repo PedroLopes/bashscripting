@@ -9,7 +9,9 @@ if [[ $mypassword = $mypasswordz ]]
 	exit
     fi
 #--------------------------------
-for f in *.gpg
+
+FILES=`find * -name '*.gpg'`
+for f in $FILES
 do
  #echo "Processing $f"
  EXT=`echo "$f" | cut -d'.' -f2`
@@ -25,7 +27,7 @@ then
     read -p "Are you sure? Remove?" -n 1 -r 
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-    	rm *.gpg
+    	find * -name '*.gpg' | xargs rm
     fi
 fi
 #--------------------------------

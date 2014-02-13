@@ -9,7 +9,7 @@ if [[ $mypassword = $mypasswordz ]]
     	exit
     fi
 #--------------------------------
-FILES=`find . -type f -not -name '*gpg' -not -name '*sh'`
+FILES=`find * -type f -not -name '*gpg' -not -name '*sh'`
 echo "$FILES"
 for f in $FILES
 do
@@ -25,7 +25,7 @@ then
     read -p "Are you sure THE SOURCES (yes/anything else)? Remove?" 
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-    	find . -type f -not -name '*gpg' -not -name '*sh' | xargs rm
+    	find * -type f -not -name '*gpg' -not -name '*sh' | xargs rm
     fi
 fi
 #--------------------------------
