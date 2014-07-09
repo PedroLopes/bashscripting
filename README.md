@@ -11,14 +11,15 @@ A collection of scripts (for unix), here's what they do:
 **encryptAll.sh**	goes through files in a directory, encrypts them all  
 **decryptAll.sh**: goes through files in a directory, deecrypts them all  
 * * *
-#### video
-ffcat: 
-* * *
 
 #### processes / UI
 **checkprocess**: checks if a process is running on your CPU. I use it for checking if Flux is running before giving a talk.  
 **macpopup**	  
 **ram**: tells you how the ram is going.  
+* * *
+
+#### video
+**ffcat**: fast concatenation of video files, using ffmpeg
 * * *
 
 #### randomness
