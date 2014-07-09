@@ -4,12 +4,12 @@ bashscripting
 A collection of scripts (for unix), here's what they do:
 
 git / code management
---------
-**updateAll.sh**:	git script that updates all submodules, useful for maintaining git with sub-projects
-**gitall**: git script that (1) adds all files, (2) commits and (3) pushes
+---
+**updateAll.sh**:	git script that updates all submodules, useful for maintaining git with sub-projects  
+**gitall**: git script that (1) adds all files, (2) commits and (3) pushes  
 
 crypto
---------
+---
 **encryptAll.sh**	goes through files in a directory, encrypts them all
 **decryptAll.sh**: goes through files in a directory, deecrypts them all
 
