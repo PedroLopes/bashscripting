@@ -12,7 +12,9 @@ A collection of scripts (for unix), here's what they do:
 **decryptAll.sh**: goes through files in a directory, deecrypts them all  
 * * *
 
-#### processes / UI
+#### UI / processes
+**presentationMode.sh**: stops dropbox, chrome and flux when you wanna give a presentation. no interruptions.   
+**presentationWarning**: apple script that shoots a warning when you start Powerpoint: do you want presentation mode?
 **checkprocess**: checks if a process is running on your CPU. I use it for checking if Flux is running before giving a talk.  
 **macpopup**	  
 **ram**: tells you how the ram is going.  
