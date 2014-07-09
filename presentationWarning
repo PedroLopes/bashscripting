@@ -1,0 +1,19 @@
+#!/bin/sh
+ 
+/usr/bin/osascript <<-EOF
+
+tell application "System Events"
+  activate
+	set question to display dialog "Hey Pedro, presentation mode?" buttons {"Yep", "Nah"} default button 2
+	set answer to button returned of question
+
+	if answer is equal to "Yep" then
+
+		tell application "Terminal"
+			do script "/Users/pedro/Dropbox/1.projects/9.other/bashscripting/presentationMode.sh start" in window 1
+		end tell
+
+	end if
+end tell
+
+EOF
