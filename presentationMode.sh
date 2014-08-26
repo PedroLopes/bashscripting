@@ -19,9 +19,9 @@ then
 	kill $(pgrep Flux)
 
 	echo "Resetting Crontab to Blank, saving current cron to file for backup"
-	touch blankcron.txt
-	crontab -l > cronbackup.txt
-	crontab blankcron.txt
+	touch ~/blankcron.txt
+	crontab -l > ~/cronbackup.txt
+	crontab ~/blankcron.txt
 
 	echo "Killing Chrome"
 	ps -A | awk '/Google\ Chrome -psn_0_32526083/ { print $1 } ' | xargs kill -9
@@ -32,7 +32,7 @@ if [ "$1" = "stop" ]
 then
 	#stop
 	echo "Populating Crontab to previous backup"
-	crontab cronbackup.txt
+	crontab ~/cronbackup.txt
 	
 	echo "Starting Dropbox"
 	/Applications/Dropbox.app/Contents/MacOS/Dropbox &
