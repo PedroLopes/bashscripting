@@ -1,0 +1,7 @@
+#!/bin/bash
+#from Lane on http://stackoverflow.com/questions/12773488/git-fatal-reference-has-invalid-format-refs-heads-master
+
+#recursively search for the conflicted files and delete them
+find . -type f -name "* conflicted copy*" -exec rm -f {} \;
+#lastly, remove any "conflicted" references from git's packed-refs file
+awk '!/conflicted/' .git/packed-refs > temp && mv temp .git/packed-refs
