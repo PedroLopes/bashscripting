@@ -25,6 +25,9 @@ A collection of scripts (for unix), here's what they do:
 **choose**:allows you to randomize a decision, yes/no  
 **random**: outputs a random number  
 * * *
+#### PDF & text
+**PDF2captions**:gets image captions on a PDF (for specific format), check it at https://github.com/PedroLopes/pdf2captions
+* * *
 
 
 
