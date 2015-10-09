@@ -11,8 +11,8 @@ A collection of scripts (for unix), here's what they do:
 **ram**: tells you how the ram is going.  
 * * *
 #### crypto
-**encryptAll.sh**	goes through files in a directory, encrypts them all  
-**decryptAll.sh**: goes through files in a directory, deecrypts them all  
+**encrypt.sh**	encrypts a file that is stored on dropbox, deletes original and restarts dropbox process  (see all options)
+**decrypt.sh**: decrypts a file that is stored on dropbox, thus stops dropbox process first (see all options)
 * * *
 #### git / code management
 **updateAll.sh**:	git script that updates all submodules, useful for maintaining git with sub-projects  
