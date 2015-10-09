@@ -1,0 +1,1 @@
+find / -name '$@' -type f -print 2>/dev/null
