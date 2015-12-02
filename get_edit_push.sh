@@ -1,1 +1,1 @@
-git pull; vim $1; git commit -am "calibrate"; git push
+git pull; vim $1; git commit -am "$2"; git push
