@@ -1,0 +1,4 @@
+#add to .bashrc, repeats the last command but in sudo mode, amazing:
+alias arghh='sudo $(history -p \!\!)'
+ 
+#based entirely on https://twitter.com/liamosaur
