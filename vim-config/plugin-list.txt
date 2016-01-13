@@ -1,0 +1,7 @@
+vim-airline
+vim-colors-solarized
+jedi-vim
+vim-arduino-ino
+vim-fugitive
+supertab
+vim-arduino-syntax

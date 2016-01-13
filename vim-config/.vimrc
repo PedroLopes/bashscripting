@@ -1,5 +1,5 @@
 "load pathogen pliugin manager
-execute pathogen#infect() "
+execute pathogen#infect() 
 " due to some issues while loading plugins, filetype is set to off
 filetype off
 
