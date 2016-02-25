@@ -136,7 +136,7 @@ set splitright
 
 " Added a keymap to opening a new terminal in a small split under the current
 " one
-map <F3> :5sp<CR>:VimShell<CR>
+map <C-B> :5sp<CR>:VimShell<CR>
 
 " Added a keymap to know what time it is.
 map <C-T> :echo 'Current time is ' . strftime('%c')<CR>
