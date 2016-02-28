@@ -1,93 +1,30 @@
-"set nocompatible              " be iMproved, required
-"filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-" " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
-"
-" " let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
-"Plugin 'scrooloose/nerdtree'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
-"
-" " The following are examples of different formats supported.
-" " Keep Plugin commands between vundle#begin/end.
-" " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" " plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" " The sparkup vim script is in a subdirectory of this repo called vim.
-" " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" " Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-"
-" " All of your Plugins must be added before the following line
-"call vundle#end()            " required
-" filetype plugin indent on    " required
-" " To ignore plugin indent changes, instead use:
-" "filetype plugin on
-" "
-" " Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plugin stuff after this line
+"Pedro's VIM config (tweaked everyday)
 
 "load pathogen pliugin manager
 execute pathogen#infect() 
 call pathogen#helptags()
 " due to some issues while loading plugins, filetype is set to off
 
-
-"--------------------------------------- had to switch to NEO Bundle just here because of nerdtree git
+"----had to switch to NEO Bundle just here because of nerdtree git
  " Note: Skip initialization for vim-tiny or vim-small.
  if 0 | endif
-
  if &compatible
-   set nocompatible               " Be iMproved
+   set nocompatible             
  endif
-
  " Required:
  set runtimepath^=~/.vim/bundle/neobundle.vim/
-
  " Required:
  call neobundle#begin(expand('~/.vim/bundle/'))
-
- " Let NeoBundle manage NeoBundle
  " Required:
  NeoBundleFetch 'Shougo/neobundle.vim'
-
- " My Bundles here:
- " Refer to |:NeoBundle-examples|.
- " Note: You don't set neobundle setting in .gvimrc!
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-
- call neobundle#end()
-
- " Required:
- filetype plugin indent on
-
- " If there are uninstalled bundles found on startup,
- " this will conveniently prompt you to install them.
+call neobundle#end()
+" Required:
+filetype plugin indent on
  NeoBundleCheck
 "---------------------------------------
 filetype off
-" I use to have these two, but off for now [delete me later]
-" syntax enable
-" set background=dark
 
 " set favorite color scheme
 colorscheme solarized
@@ -102,12 +39,8 @@ let g:airline_powerline_fonts = 1
 "allows backspace to delete chars in inser mode
 :set backspace=indent,eol,start 
 
-"allos jedi to not freakout with splits
+"allows jedi to not freakout with splits
 "let g:jedi#use_splits_not_buffers = "left"
-
-" I use to have this at end, but off for now [delete me later]
-" filetype plugin indent on
-
 
 " For crontab files I am disabling the local edit file, crontabs must be
 " edited in place (otherwise:error)
@@ -187,6 +120,19 @@ function! MaximizeToggle()
   endif
 endfunction
 
+function! CharCount()
+"	exec !wc -m %
+"endfunction
+    let countchar = system("wc -m " . bufname("%"))
+    let formated_count = "char count is:" . countchar
+    vsplit __CharCount__
+    normal! ggdG
+    setlocal buftype=nofile
+    call append(0, split(formated_count, '\v\n'))
+endfunction
+
+"nnoremap <C-M> :call CharCount()<CR>
+nnoremap <buffer> <C-M> :call CharCount()<cr>
 
 filetype plugin indent on
 syntax on
