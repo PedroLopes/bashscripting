@@ -134,5 +134,8 @@ endfunction
 "nnoremap <C-M> :call CharCount()<CR>
 nnoremap <buffer> <C-M> :call CharCount()<cr>
 
+"Activate Chrome Inspector live support (bidirectional) for faster web coding
+window.__BL_OVERRIDE_CACHE = true
+
 filetype plugin indent on
 syntax on
