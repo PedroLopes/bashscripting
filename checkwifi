@@ -1,0 +1,11 @@
+#This script checks if Wifi is running, you should call this before your app starts. That can be done by adding a call to
+#this script right before your app starts, I simply modify the app launcher for that. Some other fancy ways are doable. 
+
+#!/bin/sh
+networksetup -setairportpower en0 off 
+    /usr/bin/osascript <<-EOF
+      tell application "System Events"
+        activate
+        display dialog "Going to turn wifi off."
+      end tell
+EOF
