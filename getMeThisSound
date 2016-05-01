@@ -1,1 +1,11 @@
-youtube-dl -t -x --audio-format mp3 $1
+#!/bin/sh
+youtube-dl -t -x --audio-format mp3 $1;
+echo "Do you wish to remove all m4a in this folder (which are leftovers from conversion)?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) rm *.m4a;;
+        No ) exit;;
+    esac
+done
+
+
