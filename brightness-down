@@ -1,0 +1,10 @@
+#!/bin/sh
+temp_scripts_location="/Users/pedro/script-values/brightness"
+old_val="$(cat $temp_scripts_location)"
+new_val=`echo $old_val - 0.1 | bc`
+min=0.0
+if (( $(echo "$new_val < $min" |bc -l) )); then
+    new_val=0.0
+fi
+brightness $new_val
+echo $new_val > $temp_scripts_location
