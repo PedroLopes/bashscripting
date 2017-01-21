@@ -1,0 +1,5 @@
+#!/bin/sh
+TIME="$(($1 * 60))"
+sleep $TIME;
+brightness 0;
+pmset sleepnow
