@@ -1,6 +1,7 @@
 #!/bin/sh
-ls ~/Dropbox/12.senses/sound/RobertAshley/ThePark/*.mp3 > sleepy.play
+songs="~/path_to_your_songs/*.mp3"
+ls $songs > /tmp/sleepy.play
 TIME="$(($1 * 60))"
 sleep $TIME;
 brightness 0;
-mplayer -playlist sleepy.play
+mplayer -playlist /tmp/sleepy.play
