@@ -1,0 +1,2 @@
+#!/bin/sh
+find / -name myfile -type $1 -print 2> /dev/null
