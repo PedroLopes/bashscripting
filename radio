@@ -1,0 +1,151 @@
+#!/usr/local/bin/bash
+
+# README: this script required bash 4+ (it uses associative arrays, which are supported since bash 4)
+
+declare -A radios
+radios['jungle']='http://stream5.jungletrain.net:8000/'
+radios['soundart']='http://icecast.commedia.org.uk:8000/soundart.mp3'
+radios['resonance']='https://stream.resonance.fm/resonance'
+radios['reboot']='http://87.118.122.220:8002/stream?type=.mp3'
+radios['corax']='https://streaming.fueralle.org/corax_192.mp3'
+radios['panik']='https://streaming.domainepublic.net/radiopanik.ogg.m3u'
+radios['ARA']='https://s1.voscast.com:11187/RadioARA.mp3'
+# to add a radio, duplicate the line and change the name and URL, like radios['name']='URL'
+
+declare -A players
+players['VLC']='/Applications/VLC.app/Contents/MacOS/VLC -I curses'
+players['mocp']='mocp'
+players['mplayer']='mplayer'
+# to add a player, duplicate the line and change the name and command line invocation, like players['name']='command'
+
+
+list_radios()
+{
+echo "Available radios:"
+iter=1
+for key in "${!radios[@]}"; do
+    echo "$iter. $key at (${radios[$key]})"
+    ((iter = iter+1))
+done
+}
+
+list_players()
+{
+echo "Available command line players:"
+iter=1
+for key in "${!players[@]}"; do
+    echo "$iter. $key at (${players[$key]})"
+    ((iter = iter+1))
+done
+}
+
+
+
+help()
+{
+   echo "radio is a bash/shell script for Unix (incl. Mac) that opens a web radiio and starts playing it with a particular command line music player. "
+   echo
+   echo "Usage:\n> radio [-h|p|l]"
+   echo "options:"
+   echo "-h --help                    	Display this help."
+   echo "-r --radio <name>            	Play radio of <name> (see --list for list of available radios)."
+   echo "-R --ramdom             	Play a radio at RANDOM (see --list for list of available radios)."
+   echo "-p --player <name>           	Play radio using the <name> player (see --list-players for list of available players)."
+   echo "-pa --player-args <\"args\">	Pass additional arguments (use quotes around them) to your selected player."
+   echo "-l --list                    	Display available radios (add more by editing the script)."
+   echo "-lr --list-radios            	Display available radios (add more by editing the script)."
+   echo "-lp --list-players           	Display available radios (add more by editing the script)."
+   echo
+}
+
+function parse_params() {
+    local param
+    while [[ $# -gt 0 ]]; do
+        param="$1"
+        shift
+        case $param in
+            -h | --help)
+                help;
+                exit 0
+                ;;
+            -l | --list)
+                list_radios;
+                exit 0
+                ;;
+            -lr | --list-radios)
+                list_radios;
+                exit 0
+                ;;
+            -lp | --list-players)
+                list_players;
+                exit 0
+                ;;
+            -p | --player) #player by name
+                player=$param
+		last_arg="player"
+                ;;
+            -r | --radio) #radio by name
+                radio=$param
+		last_arg="radio"
+                ;;
+            -R | --random) #radio chosen randomly
+		range=${#radios[@]}
+		((range=range-1))
+		random=`jot -r 1 0 $range}`
+		counter=0
+		for i in "${!radios[@]}"
+		do
+		    if [ $counter -eq $random ]
+		    then
+                        radio=$i
+		    fi
+		    ((counter=counter+1))
+		done
+		;;
+            -pa | --player-args) #additional args for player
+                player_args=$param
+		last_arg="player_args"
+                ;;
+            -u | --url) #radio by url
+                url=$params
+		last_arg="url"
+		;;
+            -V | --verbose) 
+                verbose="True"
+		;;
+            *)
+		case $last_arg in
+            	  player)
+			player=$param
+			;;
+            	  radio)
+			radio=$param
+			;;
+            	  player_args)
+			player_args=$param
+			;;
+            	  url)
+			url=$param
+			;;
+		  *) 
+			echo "Invalid parameter was provided: $param"
+			;;
+		esac
+		;;
+        esac
+    done
+}
+
+parse_params "$@"
+if [ $verbose == "True" ]
+then
+    echo "-------"
+    echo "player: $player (with args $player_args)"
+    echo "radio: $radio (or at forced url: $url)"
+    echo "-------"
+fi
+if [$url -ne ""]; then
+    ${players[$player]} $player_args ${radios[$radio]}
+else 
+    ${players[$player]} $player_args $url
+fi
