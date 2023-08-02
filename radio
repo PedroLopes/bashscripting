@@ -18,6 +18,8 @@ players['mocp']='mocp'
 players['mplayer']='mplayer'
 # to add a player, duplicate the line and change the name and command line invocation, like players['name']='command'
 
+# defaults
+verbose="False"
 
 list_radios()
 {
