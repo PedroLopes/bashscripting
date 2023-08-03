@@ -1,0 +1,83 @@
+#!/usr/local/bin/bash
+
+# README: this script required bash 4+ (it uses associative arrays, which are supported since bash 4)
+
+declare -A links
+links['messages']='https://messages.google.com/web/'
+links['train']='https://www.google.com/maps/place/55th+-+56th+-+57th+St./@41.8161863,-87.6096414,13z/data=!4m8!3m7!1s0x880e290d12fb58f9:0x3051e0465d0e0ae9!6m1!1v1!8m2!3d41.7928946!4d-87.5877486!16zL20vMGdreGQ3?entry=ttu'
+# to add a link, duplicate the line and change the name and URL, like links['name']='URL'
+
+# defaults
+verbose="False"
+
+list_links()
+{
+echo "Available links:"
+iter=1
+for key in "${!links[@]}"; do
+    echo "$iter. $key at (${links[$key]})"
+    ((iter = iter+1))
+done
+}
+
+list_players()
+{
+echo "Available command line players:"
+iter=1
+for key in "${!players[@]}"; do
+    echo "$iter. $key at (${players[$key]})"
+    ((iter = iter+1))
+done
+}
+
+
+
+help()
+{
+   echo "sopen (special open) is a bash/shell script for Unix (incl. Mac) that opens a requested link name (which is a shortcut name defined by the user in the sopen executable file directly). "
+   echo
+   echo "Usage:\n> sopen <name>"
+   echo "options:"
+   echo "-h --help                    	Display this help."
+   echo "-l --list                    	Display available links (add more by editing the script)."
+   echo
+}
+
+
+function parse_params() {
+    local param
+    while [[ $# -gt 0 ]]; do
+        param="$1"
+        shift
+        case $param in
+            -h | --help)
+                help;
+                exit 0
+                ;;
+            -l | --list)
+                list_links;
+                exit 0
+                ;;
+            -V | --verbose) 
+                verbose="True"
+		;;
+            *)
+		case $last_arg in
+		  *) 
+			echo "parameter was provided: $param"
+                        target=$param
+			;;
+		esac
+		;;
+        esac
+    done
+}
+
+parse_params "$@"
+if [ $verbose == "True" ]
+then
+    echo "-------"
+    echo "verbose todo"
+    echo "-------"
+fi
+open "${links[$target]}"
