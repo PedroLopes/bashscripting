@@ -1,0 +1,33 @@
+location="test"
+PS3='Please enter your choice: '
+options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "1. lab/published (for papers)")
+            location="/apps/lab/published"
+            break
+            ;;
+        "2. lab/project-thumbnails (for images)")
+            location="/apps/lab/project-thumbnails"
+	    break
+            ;;
+        "3. lab/team-profile-photos (for mugshots)")
+            location="/apps/lab/team-profile-photos"
+            break
+            ;;
+        "4. lab/essays")
+            location="/apps/lab/essays"
+            break
+            ;;
+        "5. plopes/project-thumbnails (on personal page)")
+            location="/apps/plopes/project-thumbnails/"
+            break
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+scp $@ pedrolopes@opal14.opalstack.com:/home/pedrolopes/$location/
