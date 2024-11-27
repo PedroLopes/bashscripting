@@ -1,10 +1,26 @@
 #!/usr/local/bin/bash
 
 # README: this script required bash 4+ (it uses associative arrays, which are supported since bash 4)
+# TODO: this declare thing could be in a secret file 
+#       also search two lists, one is commands and the other is links
 
 declare -A links
+links['UISTslack']='https://app.slack.com/client/T06QTSMKNJY/D06S89C9K0R'
+links['UISTemails']='https://docs.google.com/document/d/1-FLxkeowPoezpL_EZnmsHm8wASykQFQ-q8pNqu34Im4/edit'
+links['messages']='https://messages.google.com/web/'
 links['messages']='https://messages.google.com/web/'
 links['train']='https://www.google.com/maps/place/55th+-+56th+-+57th+St./@41.8161863,-87.6096414,13z/data=!4m8!3m7!1s0x880e290d12fb58f9:0x3051e0465d0e0ae9!6m1!1v1!8m2!3d41.7928946!4d-87.5877486!16zL20vMGdreGQ3?entry=ttu'
+links['calendar']='https://calendar.google.com/calendar'
+links['telegram']='https://web.telegram.org/'
+links['server']='>ssh pedrolopes@opal14.opalstack.com'
+links['news']='https://docs.google.com/open?id=1IWXdiIh-EJ5pdxJfwmP96hnwPe1Vq4kIOZAjGzPtKIs&authuser=pedrolopes%40uchicago.edu&usp=drive_fs'
+links['SUI']='https://docs.google.com/spreadsheets/d/1Dy7Vo48GBTPhP0FGTGnuoLnG29mg3aFx/edit#gid=160517204'
+links['UIST']='https://drive.google.com/drive/folders/1nHO76B39S9EMxZkj-NEzW_P2BuD1oneV' 
+links['grades']='https://facultyaccess.uchicago.edu/selectClass.php'
+links['CCC']='https://drive.google.com/drive/folders/1oKVGOLrVIzap1AfGQ-2HP86a1Cmw8j1_'
+links['invoices']='https://us2.concursolutions.com/home.asp'
+links['morning']='https://www.youtube.com/watch?v=IT94xC35u6k'
+links['keynotes']=">cd ~/Google\ Drive/My\ Drive/0.MyLab"
 # to add a link, duplicate the line and change the name and URL, like links['name']='URL'
 
 # defaults
@@ -29,8 +45,6 @@ for key in "${!players[@]}"; do
     ((iter = iter+1))
 done
 }
-
-
 
 help()
 {
@@ -80,4 +94,16 @@ then
     echo "verbose todo"
     echo "-------"
 fi
-open "${links[$target]}"
+
+echo "${links[$target]}"
+STR="${links[$target]}"
+SUB='>'
+if [[ "$STR" == *"$SUB"* ]]; then
+  STR2=$(echo "$STR" | sed 's/>//')
+  echo "eval:"
+  eval "$STR2"
+  echo "$STR2"
+else
+  echo "open:" 
+  open "${links[$target]}"
+fi
