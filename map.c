@@ -1,3 +1,5 @@
+//TODO only for ints right now, adjust for floats please
+
 //makefile: gcc map.c -o map
 
 #include <stdio.h> //for argv
