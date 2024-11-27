@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# mac is stupid, the solution is
+## go to input and choose mic
+## to to output and choose headphones
+## then you can just run usual 
+
+#jackd -d coreaudio -i 0 -o 2 -r 44100
+
+# (which by the way, it always ignores -i 0 and searches for mic)
+
+# earpods (same as above)
+jackd -d coreaudio -i 0 -o 2 -r 48000
+
+
+# works with Phillips PH805 via aggregate device that only has the headphones. Note the crappy sample rate. 
+#jackd -d coreaudio -i 1 -o 1 -r 16000
+
+
