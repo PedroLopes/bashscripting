@@ -1,5 +1,6 @@
 #!/usr/local/bin/bash
 
+
 # README: this script required bash 4+ (it uses associative arrays, which are supported since bash 4)
 
 declare -A radios
