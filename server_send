@@ -1,4 +1,15 @@
+#!/bin/bash
+
+bitwarden_used="$1"
 location="test"
+
+if [[ "$bitwarden_used" == *"password"* ]]; then
+  echo "Using password manager (and sshpass)"
+  PASS=$(bw get password SSH:pedrolopes); # 2>/dev/null
+else
+  echo "(Passwork asked later, for scp)" 
+fi
+
 PS3='Please enter your choice: '
 options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "Quit")
 select opt in "${options[@]}"
@@ -30,4 +41,13 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
-scp $@ pedrolopes@opal14.opalstack.com:/home/pedrolopes/$location/
+
+if [ -z "$PASS" ]; then
+  # echo "Sending via scp..."
+  scp $@ pedrolopes@opal14.opalstack.com:/home/pedrolopes/$location/
+else
+  # echo "Sending via sshpass..."
+  sshpass -p $PASS scp -r ${@:2}  pedrolopes@opal14.opalstack.com:/home/pedrolopes/$location/
+fi
+
+
