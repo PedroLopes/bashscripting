@@ -6,7 +6,7 @@
 declare -A radios
 radios['jungle']='http://stream5.jungletrain.net:8000/'
 radios['soundart']='http://icecast.commedia.org.uk:8000/soundart.mp3'
-radios['resonance']='https://stream.resonance.fm/resonance'
+radios['resonance']='http://stream.resonance.fm/resonance'
 radios['reboot']='http://87.118.122.220:8002/stream?type=.mp3'
 radios['corax']='https://streaming.fueralle.org/corax_192.mp3'
 radios['panik']='https://streaming.domainepublic.net/radiopanik.ogg.m3u'
