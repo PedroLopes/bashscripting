@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# add on to the .zshrc file (PUBLIC FILE, CAREFUL)
+  # note, zsh "" (replaced on load) vs '' (on command invoke)
+
+alias bitwarden="/Users/pedrolopes/playground/bitwarden/bw"
+alias bw="/Users/pedrolopes/playground/bitwarden/bw"
+alias pw_uchicago='echo -n $(bw get password shibboleth) | pbcopy'
+alias pw_server='echo -n $(bw get password SSH:pedrolopes) | pbcopy'
