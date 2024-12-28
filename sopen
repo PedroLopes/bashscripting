@@ -13,6 +13,7 @@ links['train']='https://www.google.com/maps/place/55th+-+56th+-+57th+St./@41.816
 links['calendar']='https://calendar.google.com/calendar'
 links['telegram']='https://web.telegram.org/'
 links['server']='>ssh pedrolopes@opal14.opalstack.com'
+links['server+pass']='>sshpass -p $(bw get password SSH:pedrolopes) ssh pedrolopes@opal14.opalstack.com'
 links['news']='https://docs.google.com/open?id=1IWXdiIh-EJ5pdxJfwmP96hnwPe1Vq4kIOZAjGzPtKIs&authuser=pedrolopes%40uchicago.edu&usp=drive_fs'
 links['SUI']='https://docs.google.com/spreadsheets/d/1Dy7Vo48GBTPhP0FGTGnuoLnG29mg3aFx/edit#gid=160517204'
 links['UIST']='https://drive.google.com/drive/folders/1nHO76B39S9EMxZkj-NEzW_P2BuD1oneV' 
