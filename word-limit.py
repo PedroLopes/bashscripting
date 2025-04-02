@@ -1,3 +1,12 @@
+# word-limit.py: counts how many words a .docx file has. 
+# This can be used on a file for ACM CHI conference or ACM UIST, you can skip automatically over captions or include them, or even see the count with or without references. 
+# How to use (in your command line): 
+#   >python3 word-limit.py -f -v file.docx
+#   ...this example counts words in a file, including captions of figures. Excludes references. 
+#   >python3 word-limit.py --help
+#   ... this will allow you to get started and see the options
+
+
 from docx import Document
 import sys
 import re
