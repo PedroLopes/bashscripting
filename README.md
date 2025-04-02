@@ -3,6 +3,9 @@ bashscripting
 
 A collection of scripts (for unix), here's what they do:
 
+#### Count words on a .docx file
+**word-limit.py** count how many words a .docx file has, like a file for ACM CHI conference or ACM UIST, you can skip automatically over captions or include them, or even see the count with or without references. You call it like ``>python3 word-limit.py --help`` to get started.
+
 #### IUI / control you OS
 **presentationMode.sh**: stops dropbox, chrome and flux when you wanna give a presentation. no interruptions.   
 **presentationWarning**: apple script that shoots a warning when you start Powerpoint: do you want presentation mode?
