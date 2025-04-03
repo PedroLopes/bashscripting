@@ -1,0 +1,37 @@
+Setting up Vim to yank to clipboard on Mac OS X
+(From https://www.markcampbell.me/2016/04/12/setting-up-yank-to-clipboard-on-a-mac-with-vim.html)
+
+# Ensuring Vim is capable
+If you just want to be able to copy to OS X's clipboard, you just need +clipboard. If you want X11 clipboard support, you need +xterm_clipboard.
+
+``vim --version``
+
++clipboard
++xterm_clipboard
+
+# Installing Vim via homebrew with the proper options
+I use homebrew and I used it to install Vim. If you run brew options vim, you'll see the options available. What we're looking for is --with-client-server:
+
+$ brew options vim
+...
+--with-client-server
+  Enable client/server mode
+...
+
+Now, if you just run brew install vim, it'll compile Vim with just +clipboard. If you want X11 clipboard support, you need to install it with the --with-client-server option.
+
+$ brew install vim --with-client-server
+...a few lines later...
+🍺  /usr/local/Cellar/vim/7.4.1724: 1,684 files, 25M, built in 42 seconds
+
+# Setting Vim to use the clipboard
+Add to .vimrc (Note to self, this is what I needed on mac, I actually do not use +xterm_clipboard and it works). 
+
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif

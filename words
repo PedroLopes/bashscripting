@@ -1,0 +1,3 @@
+#!/bin/sh
+python3.11 $PLAYGROUND/bashscripting/word-limit.py $@
+
