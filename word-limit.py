@@ -1,4 +1,4 @@
-# word-limit.py: counts how many words a .docx file has. 
+# word-limit.py: counts how many words a .docx or .pdf file has. 
 # This can be used on a file for ACM CHI conference or ACM UIST, you can skip automatically over captions or include them, or even see the count with or without references. 
 # How to use (in your command line): 
 #   >python3 word-limit.py -f -v file.docx
@@ -6,11 +6,15 @@
 #   >python3 word-limit.py --help
 #   ... this will allow you to get started and see the options
 
+# File type? This only supports .pdf or .docx 
+# No flags are needed, the filetype is detected from extension
 
 from docx import Document
 import sys
 import re
 import argparse
+import datetime
+import subprocess
 
 # figure is detected from the following template
 # "Figure <number>. <text until end of line>"
@@ -39,7 +43,35 @@ parser.add_argument('-n', '--no_determination', action='store_true', help='Does 
 parser.add_argument('filename')
 
 args = parser.parse_args()
-paper = Document(args.filename)
+paper = None
+
+class Text: #honestly, kind of a ugly solution
+    def __init__(self, pdf=None, doc=None):
+        self.pdf = pdf
+        self.doc = doc
+    def paragraphs(self):
+        if self.pdf is not None:
+            return self.pdf
+        else:
+            return self.doc.paragraphs
+    def text(self, par):
+         print(par)
+         if self.pdf is not None:
+            return par
+         else:
+            return par.text
+
+if args.filename[-4:].lower() == ".pdf":
+    #print("PDF")
+    now = datetime.datetime.now()
+    formatted_date = now.strftime("%Y_%m_%d_%H_%M_%S")
+    result = subprocess.run(['pdftotext', args.filename, 'out_' + formatted_date + '.txt'], capture_output=True, text=True)
+    # note that pdftotext was run without layout flag
+    with open('out_' + formatted_date + '.txt', 'r') as file:
+        paper = Text(pdf=file.readlines())
+elif args.filename[-5:].lower() == ".docx":
+    #print("DOCX")
+    paper = Text(doc=Document(args.filename))
 
 # store counts
 count_all = [] 
@@ -47,18 +79,18 @@ count_figures = []
 count_references = []
 REFERENCES_FOUND = False
 
-for par in paper.paragraphs:
+for par in paper.paragraphs(): #no () 
 
-    if fig.match(par.text.strip()) is not None: # target text is a figure
+    if fig.match(paper.text(par).strip()) is not None: # target text is a figure
         if args.count_figure: # and we have figure flag enabled
-            count_all.append(par.text) # thus, counted figure
-            count_figures.append(par.text) # counted figures for stats
+            count_all.append(paper.text(par)) # thus, counted figure
+            count_figures.append(paper.text(par)) # counted figures for stats
         else: 
-            count_figures.append(par.text) # counted figures for stats
+            count_figures.append(paper.text(par)) # counted figures for stats
             if args.debug:
-                print("Debug\tFIGURE_SKIP\t" + par.text)
+                print("Debug\tFIGURE_SKIP\t" + paper.text(par))
 
-    elif par.text.strip() == REFERENCES: #passing over the references
+    elif paper.text(par).strip() == REFERENCES: #passing over the references
         REFERENCES_FOUND = True
         continue
 
@@ -66,12 +98,12 @@ for par in paper.paragraphs:
         count_all.append(par.text) # enabled so counted reference as main
         count_references.append(par.text) # count reference for stats
     elif not args.count_references and REFERENCES_FOUND:
-        count_references.append(par.text) # count reference for stats
+        count_references.append(paper.text(par)) # count reference for stats
         if args.debug:
-            print("Debug\tREFERENCE_SKIP\t" + par.text)
+            print("Debug\tREFERENCE_SKIP\t" + paper.text(par))
     
     else: # catch all
-        count_all.append(par.text)
+        count_all.append(paper.text(par))
        
 if args.debug: 
     print(len('\n'.join(count_all).split()))
