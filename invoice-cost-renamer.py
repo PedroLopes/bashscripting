@@ -36,7 +36,4 @@ if args.filename[-4:].lower() == ".pdf":
             value = line[match_group.group().find("$"):-1]
             print(value)
 
-    subprocess.call(['mv', args.filename, str(value)+"_"+args.filename])
-
-
-
+    subprocess.call(['mv', args.filename, str(value[1:-1])+"_"+args.filename])
