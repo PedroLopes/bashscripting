@@ -11,7 +11,7 @@ else
 fi
 
 PS3='Please enter your choice: '
-options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "6. lab/sponsors" "Quit")
+options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "6. lab/sponsors" "7. lab/slides" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -39,6 +39,10 @@ do
             location="/apps/lab/sponsors/"
             break
             ;;
+        "7. lab/slides")
+            location="/apps/lab/slides/"
+            break
+            ;;
         "Quit")
             break
             ;;
@@ -51,5 +55,5 @@ if [ -z "$PASS" ]; then
   scp $@ $SERVER_LOCATION:/home/pedrolopes/$location/
 else
   # echo "Sending via sshpass..."
-  sshpass -p $PASS scp -r ${@:2}  $SERVER_LOCATION:/home/pedrolopes/$location/
+  sshpass -p $PASS scp  -r ${@:2}  $SERVER_LOCATION:/home/pedrolopes/$location/
 fi

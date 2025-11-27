@@ -3,6 +3,9 @@
 *.pdf
 *.txt
 
+# Variables files
+secret*
+
 # mac
 .DS_Store
 

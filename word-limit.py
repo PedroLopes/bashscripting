@@ -81,6 +81,8 @@ REFERENCES_FOUND = False
 
 for par in paper.paragraphs(): #no () 
 
+    #print(paper.text(par))
+
     if fig.match(paper.text(par).strip()) is not None: # target text is a figure
         if args.count_figure: # and we have figure flag enabled
             count_all.append(paper.text(par)) # thus, counted figure
