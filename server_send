@@ -11,7 +11,7 @@ else
 fi
 
 PS3='Please enter your choice: '
-options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "6. lab/sponsors" "7. lab/slides" "Quit")
+options=("1. lab/published (for papers)" "2. lab/project-thumbnails (for images)" "3. lab/team-profile-photos (for mugshots)" "4. lab/essays" "5. plopes/project-thumbnails (on personal page)" "6. lab/sponsors" "7. lab/slides" "8. lab/news-images" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -41,6 +41,10 @@ do
             ;;
         "7. lab/slides")
             location="/apps/lab/slides/"
+            break
+            ;;
+        "8. lab/news-images")
+            location="/apps/lab/news-images/"
             break
             ;;
         "Quit")
