@@ -1,9 +1,10 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 # README: this script required bash 4+ (it uses associative arrays, which are supported since bash 4)
 #       also search two lists, one is commands and the other is links
 
 source ./secret_variables.sh
+source ~/.bash_profile
 
 # defaults
 verbose="False"
@@ -82,9 +83,11 @@ STR="${links[$target]}"
 SUB='>'
 if [[ "$STR" == *"$SUB"* ]]; then
   STR2=$(echo "$STR" | sed 's/>//')
-  echo "eval:"
-  eval "$STR2"
-  echo "$STR2"
+  #echo "eval:"
+  #echo "$STR2"
+  #eval "\"$STR2"\" #this should work (I don't get it) TODO
+  echo -e "Opening in a subshell with command: $STR2\nDo exit to quit this subshell and return here."
+  bash -c "exec bash --init-file <(echo \"$STR2\")"
 else
   echo "open:" 
   open "${links[$target]}"
