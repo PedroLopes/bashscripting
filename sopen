@@ -85,9 +85,12 @@ if [[ "$STR" == *"$SUB"* ]]; then
   STR2=$(echo "$STR" | sed 's/>//')
   #echo "eval:"
   #echo "$STR2"
-  #eval "\"$STR2"\" #this should work (I don't get it) TODO
-  echo -e "Opening in a subshell with command: $STR2\nDo exit to quit this subshell and return here."
-  bash -c "exec bash --init-file <(echo \"$STR2\")"
+  if [ "${STR2:0:2}" == "cd" ]; then #this is a strange necessary hack right now
+    echo -e "Opening in a subshell with command: $STR2\nDo exit to quit this subshell and return here."
+    bash -c "exec bash --init-file <(echo \"$STR2\")"
+  else
+    eval "$STR2" #this works for a command like bitwarden but not for cd? What? TODO
+  fi
 else
   echo "open:" 
   open "${links[$target]}"
